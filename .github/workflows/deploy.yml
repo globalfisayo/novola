@@ -15,10 +15,10 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # Serves the site from https://<user>.github.io/<repo>/ out of the box.
-  # If you attach a custom domain (e.g. fisayo.org) in Settings -> Pages,
-  # change the line below to:  VITE_BASE: /
-  VITE_BASE: /${{ github.event.repository.name }}/
+  # The site is served from the custom domain novolafoundation.org, so assets
+  # live at the root path. (If you ever remove the custom domain and fall back
+  # to https://<user>.github.io/<repo>/, change this to: /${{ github.event.repository.name }}/ )
+  VITE_BASE: /
 
 jobs:
   build:
