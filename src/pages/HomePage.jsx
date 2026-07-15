@@ -18,6 +18,7 @@ import {
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import BlogCard from '@/components/BlogCard.jsx';
+import KoffeechatMockup from '@/components/KoffeechatMockup.jsx';
 import { getRecentPosts } from '@/lib/blog';
 
 // The Alttene ecosystem in one list: one product, two initiatives.
@@ -95,38 +96,51 @@ const HomePage = () => {
           <div className="absolute inset-0 bg-grid-faint" aria-hidden="true"></div>
 
           <div className="container-custom relative z-10 py-24">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl"
-            >
-              <Badge className="mb-6 bg-sky-400/15 text-sky-300 border border-sky-400/30 hover:bg-sky-400/20 uppercase tracking-widest font-semibold">
-                Venture Studio
-              </Badge>
-              <h1 className="mb-6 text-white">
-                We build things that start with a conversation.
-              </h1>
-              <p className="text-xl md:text-2xl text-sky-100/80 mb-8 leading-relaxed">
-                Alttene Ventures is the home of <span className="text-white font-semibold">Koffeechat</span>, our flagship product — and the studio behind initiatives like <span className="text-white font-semibold">Fisayo.org</span> and <span className="text-white font-semibold">Alto Partners</span>, our consulting firm.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="text-base bg-sky-500 hover:bg-sky-400 text-white">
-                  <Link to="/koffeechat">
-                    <Coffee className="mr-2 h-5 w-5" />
-                    Discover Koffeechat
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="text-base border-sky-300/40 bg-transparent text-sky-100 hover:bg-sky-400/10 hover:text-white"
-                >
-                  <Link to="/initiatives">Explore Our Initiatives</Link>
-                </Button>
-              </div>
-            </motion.div>
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <Badge className="mb-6 bg-sky-400/15 text-sky-300 border border-sky-400/30 hover:bg-sky-400/20 uppercase tracking-widest font-semibold">
+                  Venture Studio
+                </Badge>
+                <h1 className="mb-6 text-white">
+                  We build things that start with a conversation.
+                </h1>
+                <p className="text-lg md:text-xl text-sky-100/80 mb-8 leading-relaxed">
+                  Alttene Ventures is the home of <span className="text-white font-semibold">Koffeechat</span>, our flagship product — and the studio behind initiatives like <span className="text-white font-semibold">Fisayo.org</span> and <span className="text-white font-semibold">Alto Partners</span>, our consulting firm.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button size="lg" asChild className="text-base bg-sky-500 hover:bg-sky-400 text-white">
+                    <a href="https://app.koffeechat.com/" target="_blank" rel="noopener noreferrer">
+                      <Coffee className="mr-2 h-5 w-5" />
+                      Try Koffeechat Free
+                    </a>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    asChild
+                    className="text-base border-sky-300/40 bg-transparent text-sky-100 hover:bg-sky-400/10 hover:text-white"
+                  >
+                    <Link to="/initiatives">Explore Our Initiatives</Link>
+                  </Button>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.15 }}
+                className="mx-auto w-full max-w-xl lg:max-w-none"
+              >
+                <KoffeechatMockup />
+                <p className="mt-5 text-center text-xs uppercase tracking-widest text-sky-200/50">
+                  Koffeechat · Coffee Chats
+                </p>
+              </motion.div>
+            </div>
           </div>
         </section>
 
