@@ -4,7 +4,7 @@ import Reveal from '@/components/Reveal.jsx';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { getPostImageUrl, formatPostDate } from '@/lib/blog';
+import { getPostImageUrl, formatPostDate, FALLBACK_POST_IMAGE } from '@/lib/blog';
 
 const BlogCard = ({ post, variant = 'recent', delay = 0 }) => {
   if (!post) return null;
@@ -27,6 +27,9 @@ const BlogCard = ({ post, variant = 'recent', delay = 0 }) => {
             <img
               src={imageUrl}
               alt={post.title}
+              onError={(e) => {
+                e.currentTarget.src = FALLBACK_POST_IMAGE;
+              }}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             {post.category && (
@@ -73,6 +76,9 @@ const BlogCard = ({ post, variant = 'recent', delay = 0 }) => {
           <img
             src={imageUrl}
             alt={post.title}
+            onError={(e) => {
+              e.currentTarget.src = FALLBACK_POST_IMAGE;
+            }}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>

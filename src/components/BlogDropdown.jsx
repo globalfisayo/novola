@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, ChevronRight } from 'lucide-react';
-import { getRecentPosts, formatPostDate } from '@/lib/blog';
+import { Calendar, ChevronRight } from 'lucide-react';
+import { getRecentPosts, getPostImageUrl, formatPostDate, FALLBACK_POST_IMAGE } from '@/lib/blog';
 
 const BlogDropdown = () => {
   const posts = getRecentPosts(5);
 
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 w-80">
-      <div className="bg-popover border border-border rounded-xl shadow-lg overflow-hidden">
-        <div className="p-4 bg-muted/50 border-b border-border flex justify-between items-center">
+    <div className="absolute top-full left-1/2 -translate-x-[55%] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 w-[26rem]">
+      <div className="bg-popover border border-border rounded-2xl shadow-xl overflow-hidden">
+        <div className="px-5 py-4 bg-muted/50 border-b border-border flex justify-between items-center">
           <span className="font-semibold text-sm text-foreground">Latest Insights</span>
           <Link to="/blog" className="text-xs text-primary hover:underline font-medium flex items-center">
             View all <ChevronRight className="h-3 w-3 ml-1" />
@@ -17,25 +17,41 @@ const BlogDropdown = () => {
         </div>
         <div className="p-2 flex flex-col">
           {posts.length > 0 ? (
-            posts.map(post => {
+            posts.map((post) => {
               const formattedDate = formatPostDate(post.publication_date, {
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric',
               });
-              
+
               return (
-                <Link 
-                  key={post.id} 
+                <Link
+                  key={post.id}
                   to={`/blog/${post.slug}`}
-                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                  className="flex items-center gap-3.5 p-2.5 rounded-xl hover:bg-accent transition-colors group/item"
                 >
-                  <FileText className="h-4 w-4 mt-0.5 text-muted-foreground flex-shrink-0" />
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium leading-tight text-foreground line-clamp-2">
+                  <div className="h-14 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
+                    <img
+                      src={getPostImageUrl(post)}
+                      alt=""
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = FALLBACK_POST_IMAGE;
+                      }}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover/item:scale-105"
+                    />
+                  </div>
+                  <div className="flex min-w-0 flex-col">
+                    {post.category && (
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-primary mb-0.5">
+                        {post.category}
+                      </span>
+                    )}
+                    <span className="text-sm font-medium leading-snug text-foreground line-clamp-2">
                       {post.title}
                     </span>
-                    <span className="text-xs text-muted-foreground mt-1">
+                    <span className="mt-1 flex items-center text-xs text-muted-foreground">
+                      <Calendar className="mr-1 h-3 w-3" />
                       {formattedDate}
                     </span>
                   </div>

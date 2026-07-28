@@ -26,6 +26,10 @@ const loaderByFile = Object.fromEntries(
 const FALLBACK_IMAGE =
   'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?q=80&w=1200&auto=format&fit=crop';
 
+// Exported so <img> onError handlers can swap a dead external image URL for
+// the default artwork instead of showing a broken-image icon.
+export const FALLBACK_POST_IMAGE = FALLBACK_IMAGE;
+
 // Root-relative paths (e.g. "/uploads/photo.jpg" written by the CMS) need the
 // Vite base prefix so they resolve when the site is served from a subpath.
 // External URLs (https://...) and empty values pass through untouched.
