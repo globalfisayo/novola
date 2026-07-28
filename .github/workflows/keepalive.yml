@@ -1,0 +1,35 @@
+name: Supabase keep-alive
+
+# Free Supabase projects are auto-paused after 7 days of inactivity. This job
+# makes a tiny read request to the database every 3 days so the Novola project
+# (which powers the contact/volunteer forms + /admin dashboard) stays awake.
+#
+# Note: the key below is the PUBLIC anon key (already shipped in the site
+# bundle) — safe to commit. Row Level Security is the real security boundary.
+#
+# Caveat: GitHub disables scheduled workflows if the repository gets no commits
+# for 60 days. Any blog edit or site change resets that clock, so in normal use
+# this keeps running. To remove auto-pausing entirely, upgrade Supabase to Pro.
+
+on:
+  schedule:
+    - cron: '23 7 */3 * *' # every 3 days at 07:23 UTC
+  workflow_dispatch: # lets you run it manually from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtrcWFlZXpvYnBjaWV2amZhdmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNDQyNjksImV4cCI6MjA5ODYyMDI2OX0.T-kugaEeUu2ywJLW6DHFQFOIBkjI7S8Mm2-Uqio0XAs"
+          CODE=$(curl -s -m 30 -o /dev/null -w "%{http_code}" \
+            "https://kkqaeezobpcievjfavjx.supabase.co/rest/v1/submissions?select=id&limit=1" \
+            -H "apikey: $ANON" -H "Authorization: Bearer $ANON")
+          echo "Supabase responded with HTTP $CODE"
+          # 2xx means the DB answered (kept alive). Fail the job on anything else
+          # so a paused/broken project is visible in the Actions tab.
+          case "$CODE" in
+            2*) echo "Keep-alive OK." ;;
+            *) echo "Keep-alive did NOT get a healthy response — the project may be paused."; exit 1 ;;
+          esac
