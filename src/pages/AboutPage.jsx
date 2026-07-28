@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Coffee, Heart, Briefcase, Gem, Users, MessageCircle, TrendingUp, ArrowRight } from 'lucide-react';
@@ -63,7 +63,7 @@ const AboutPage = () => {
         {/* Hero */}
         <section className="py-20 bg-gradient-to-br from-primary/10 via-accent/60 to-secondary/40 border-b border-border">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -74,7 +74,7 @@ const AboutPage = () => {
               <p className="text-xl text-muted-foreground leading-relaxed">
                 Alttene Ventures is a small venture studio with one product we obsess over — Koffeechat — and two initiatives that carry our values further: Fisayo.org and Alto Partners.
               </p>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 
@@ -82,7 +82,7 @@ const AboutPage = () => {
         <section className="py-20">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -98,9 +98,9 @@ const AboutPage = () => {
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   We're deliberately small, deliberately focused, and based in Lagos with a view of everywhere.
                 </p>
-              </motion.div>
+              </Reveal>
 
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -117,7 +117,7 @@ const AboutPage = () => {
                     <p className="text-muted-foreground leading-relaxed">{item.text}</p>
                   </div>
                 ))}
-              </motion.div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -125,7 +125,7 @@ const AboutPage = () => {
         {/* Values */}
         <section className="py-20 bg-muted/30">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -136,11 +136,11 @@ const AboutPage = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Four values, applied everywhere — from a line of code to a client engagement.
               </p>
-            </motion.div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {values.map((value, index) => (
-                <motion.div
+                <Reveal
                   key={value.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -153,7 +153,7 @@ const AboutPage = () => {
                   </div>
                   <h3 className="text-lg font-bold mb-2">{value.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
-                </motion.div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -162,7 +162,7 @@ const AboutPage = () => {
         {/* Ecosystem recap */}
         <section className="py-20">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -170,7 +170,7 @@ const AboutPage = () => {
               className="text-center mb-12"
             >
               <h2 className="mb-4">The Alttene ecosystem at a glance</h2>
-            </motion.div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <div className="text-center bg-card border border-border rounded-2xl p-8">
@@ -190,7 +190,7 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -203,7 +203,7 @@ const AboutPage = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 

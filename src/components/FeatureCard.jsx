@@ -1,12 +1,12 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 const FeatureCard = ({ icon: Icon, title, description, link, delay = 0 }) => {
   return (
-    <motion.div
+    <Reveal
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -33,7 +33,7 @@ const FeatureCard = ({ icon: Icon, title, description, link, delay = 0 }) => {
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </Reveal>
   );
 };
 

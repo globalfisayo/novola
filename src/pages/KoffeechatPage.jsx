@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -92,7 +92,7 @@ const KoffeechatPage = () => {
         <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-hero-night">
           <div className="absolute inset-0 bg-grid-faint" aria-hidden="true"></div>
           <div className="container-custom relative z-10 py-24">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -123,14 +123,14 @@ const KoffeechatPage = () => {
                   <a href="#how-it-works">How It Works</a>
                 </Button>
               </div>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 
         {/* Features */}
         <section className="py-20 bg-muted/30">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -141,7 +141,7 @@ const KoffeechatPage = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Every feature exists to answer one question: how do we get two right people into one good conversation?
               </p>
-            </motion.div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
@@ -160,7 +160,7 @@ const KoffeechatPage = () => {
         {/* How it works */}
         <section id="how-it-works" className="py-20 scroll-mt-16">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -171,11 +171,11 @@ const KoffeechatPage = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 We stripped away everything that makes networking feel like work.
               </p>
-            </motion.div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {steps.map((step, index) => (
-                <motion.div
+                <Reveal
                   key={step.number}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -188,7 +188,7 @@ const KoffeechatPage = () => {
                   </span>
                   <h3 className="text-xl font-bold mt-4 mb-3">{step.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-                </motion.div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -197,7 +197,7 @@ const KoffeechatPage = () => {
         {/* CTA band */}
         <section className="py-20 bg-primary text-primary-foreground">
           <div className="container-custom text-center">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -215,7 +215,7 @@ const KoffeechatPage = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 

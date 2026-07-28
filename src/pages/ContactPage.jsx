@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Mail, MapPin, Phone, Twitter, Linkedin, Instagram } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
@@ -51,7 +51,7 @@ const ContactPage = () => {
         {/* Hero Section */}
         <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -61,7 +61,7 @@ const ContactPage = () => {
               <p className="text-xl text-muted-foreground leading-relaxed">
                 Curious about Koffeechat? Exploring an engagement with Alto Partners? Partnering with Fisayo.org? We'd love to hear from you.
               </p>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 
@@ -71,7 +71,7 @@ const ContactPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Contact Info */}
               <div className="lg:col-span-1 space-y-8">
-                <motion.div
+                <Reveal
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -100,9 +100,9 @@ const ContactPage = () => {
                       </div>
                     ))}
                   </div>
-                </motion.div>
+                </Reveal>
 
-                <motion.div
+                <Reveal
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -123,9 +123,9 @@ const ContactPage = () => {
                       </a>
                     ))}
                   </div>
-                </motion.div>
+                </Reveal>
 
-                <motion.div
+                <Reveal
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -139,11 +139,11 @@ const ContactPage = () => {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Saturday - Sunday: Closed
                   </p>
-                </motion.div>
+                </Reveal>
               </div>
 
               {/* Contact Form */}
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -156,7 +156,7 @@ const ContactPage = () => {
                     <ContactForm />
                   </CardContent>
                 </Card>
-              </motion.div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -164,7 +164,7 @@ const ContactPage = () => {
         {/* Map Section */}
         <section className="py-20 bg-muted/30">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -175,9 +175,9 @@ const ContactPage = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 We're based in Lagos, Nigeria, the economic hub of West Africa.
               </p>
-            </motion.div>
+            </Reveal>
 
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -194,7 +194,7 @@ const ContactPage = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Alttene Ventures Location"
               ></iframe>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 

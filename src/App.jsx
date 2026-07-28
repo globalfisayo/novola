@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop.jsx';
+import { IntroProvider } from './components/Reveal.jsx';
 import HomePage from './pages/HomePage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import KoffeechatPage from './pages/KoffeechatPage.jsx';
@@ -19,6 +20,7 @@ function App() {
   return (
     <Router basename={basename}>
       <ScrollToTop />
+      <IntroProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -29,6 +31,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </IntroProvider>
       <Toaster />
     </Router>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { ChevronRight, Calendar, User, Tag, Download, Quote, ArrowLeft, Loader2 } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
@@ -104,7 +104,7 @@ const BlogPostDetail = () => {
                 <span className="truncate max-w-[200px] sm:max-w-xs">{post.title}</span>
               </nav>
 
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -135,7 +135,7 @@ const BlogPostDetail = () => {
                     <span>{formattedDate}</span>
                   </div>
                 </div>
-              </motion.div>
+              </Reveal>
             </div>
           </section>
 

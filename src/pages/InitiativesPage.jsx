@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -72,7 +72,7 @@ const InitiativesPage = () => {
         {/* Hero */}
         <section className="py-20 bg-gradient-to-br from-primary/10 via-accent/60 to-secondary/40 border-b border-border">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -83,7 +83,7 @@ const InitiativesPage = () => {
               <p className="text-xl text-muted-foreground leading-relaxed">
                 Koffeechat is what we build. These initiatives are why we build — carrying Alttene's values into communities and boardrooms alike.
               </p>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 
@@ -91,7 +91,7 @@ const InitiativesPage = () => {
         <section id="fisayo-org" className="py-20 scroll-mt-16">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -114,9 +114,9 @@ const InitiativesPage = () => {
                     <ArrowUpRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
-              </motion.div>
+              </Reveal>
 
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -134,7 +134,7 @@ const InitiativesPage = () => {
                     </div>
                   </div>
                 ))}
-              </motion.div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -143,7 +143,7 @@ const InitiativesPage = () => {
         <section id="alto-partners" className="py-20 bg-muted/30 scroll-mt-16">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -167,9 +167,9 @@ const InitiativesPage = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-              </motion.div>
+              </Reveal>
 
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -187,7 +187,7 @@ const InitiativesPage = () => {
                     </div>
                   </div>
                 ))}
-              </motion.div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -195,7 +195,7 @@ const InitiativesPage = () => {
         {/* CTA */}
         <section className="py-20 bg-primary text-primary-foreground">
           <div className="container-custom text-center">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -209,7 +209,7 @@ const InitiativesPage = () => {
               <Button size="lg" variant="secondary" asChild>
                 <Link to="/contact">Get in Touch</Link>
               </Button>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 

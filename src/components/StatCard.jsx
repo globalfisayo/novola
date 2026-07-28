@@ -1,10 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Card, CardContent } from '@/components/ui/card';
 
 const StatCard = ({ number, label, description, delay = 0, className = '' }) => {
   return (
-    <motion.div
+    <Reveal
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -26,7 +26,7 @@ const StatCard = ({ number, label, description, delay = 0, className = '' }) => 
           )}
         </CardContent>
       </Card>
-    </motion.div>
+    </Reveal>
   );
 };
 

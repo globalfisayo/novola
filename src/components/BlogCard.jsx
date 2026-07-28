@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,7 +15,7 @@ const BlogCard = ({ post, variant = 'recent', delay = 0 }) => {
 
   if (variant === 'featured') {
     return (
-      <motion.div
+      <Reveal
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -55,13 +55,13 @@ const BlogCard = ({ post, variant = 'recent', delay = 0 }) => {
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </Reveal>
     );
   }
 
   // Recent variant
   return (
-    <motion.div
+    <Reveal
       initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -91,7 +91,7 @@ const BlogCard = ({ post, variant = 'recent', delay = 0 }) => {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </Reveal>
   );
 };
 

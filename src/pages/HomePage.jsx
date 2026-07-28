@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -97,7 +97,7 @@ const HomePage = () => {
 
           <div className="container-custom relative z-10 py-24">
             <div className="grid items-center gap-12 lg:grid-cols-2">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -127,9 +127,9 @@ const HomePage = () => {
                     <Link to="/initiatives">Explore Our Initiatives</Link>
                   </Button>
                 </div>
-              </motion.div>
+              </Reveal>
 
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, y: 40, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.9, delay: 0.15 }}
@@ -139,7 +139,7 @@ const HomePage = () => {
                 <p className="mt-5 text-center text-xs uppercase tracking-widest text-sky-200/50">
                   Koffeechat · Coffee Chats
                 </p>
-              </motion.div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -147,7 +147,7 @@ const HomePage = () => {
         {/* Ecosystem — one product, two initiatives */}
         <section className="py-20 bg-muted/30">
           <div className="container-custom">
-            <motion.div
+            <Reveal
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -158,11 +158,11 @@ const HomePage = () => {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Everything we do lives under one roof: a product we obsess over, and initiatives that carry our values into the world.
               </p>
-            </motion.div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {ecosystem.map((item, index) => (
-                <motion.div
+                <Reveal
                   key={item.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -199,7 +199,7 @@ const HomePage = () => {
                       <ArrowUpRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
                   )}
-                </motion.div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -209,7 +209,7 @@ const HomePage = () => {
         <section className="py-20">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -230,9 +230,9 @@ const HomePage = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-              </motion.div>
+              </Reveal>
 
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -247,7 +247,7 @@ const HomePage = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/40 to-transparent"></div>
                 </div>
-              </motion.div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -256,7 +256,7 @@ const HomePage = () => {
         <section className="py-20 bg-primary text-primary-foreground">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -272,9 +272,9 @@ const HomePage = () => {
                 <Button size="lg" variant="secondary" asChild>
                   <Link to="/about">Read Our Story</Link>
                 </Button>
-              </motion.div>
+              </Reveal>
 
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -288,7 +288,7 @@ const HomePage = () => {
                     <p className="text-sm opacity-80">{p.description}</p>
                   </div>
                 ))}
-              </motion.div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -297,7 +297,7 @@ const HomePage = () => {
         {latestPosts.length > 0 && (
           <section className="py-20 bg-muted/30">
             <div className="container-custom">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -316,7 +316,7 @@ const HomePage = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-              </motion.div>
+              </Reveal>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {latestPosts.map((post, index) => (

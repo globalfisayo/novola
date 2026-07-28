@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal.jsx';
 import { LayoutGrid, Filter } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
@@ -38,7 +38,7 @@ const BlogLanding = () => {
           {/* Header Section */}
           <section className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5 border-b border-border">
             <div className="container-custom">
-              <motion.div
+              <Reveal
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
@@ -54,7 +54,7 @@ const BlogLanding = () => {
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
                   Product updates from Koffeechat, lessons from Alto Partners engagements, and stories from the Fisayo.org community.
                 </p>
-              </motion.div>
+              </Reveal>
             </div>
           </section>
 
