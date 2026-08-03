@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/motion';
 import { Calendar, Users, MapPin, Video, Briefcase, Rocket, Building2, BookOpen, DollarSign, Heart } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';

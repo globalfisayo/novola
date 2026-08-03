@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion } from '@/lib/motion';
 import { Button } from '@/components/ui/button';
 import { Briefcase, Rocket, Building2, Users, Target, TrendingUp } from 'lucide-react';
 import Header from '@/components/Header.jsx';
