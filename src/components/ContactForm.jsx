@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,10 +10,41 @@ import { submitApplication } from '@/lib/submissions';
 
 const emptyForm = { name: '', email: '', inquiryType: '', message: '' };
 
+const CONTACT_EMAIL = 'info@novola.org';
+
+const INQUIRY_LABELS = {
+  volunteer: 'Volunteer',
+  mentorship: 'Mentor Fellows',
+  donation: 'Donation',
+  partnership: 'Partnership Inquiry',
+  general: 'General Question',
+};
+
+// If the database is unreachable, the visitor should never be the one who loses
+// out. This turns whatever they typed into a ready-to-send email so the enquiry
+// still reaches us.
+const buildMailtoLink = ({ name, email, inquiryType, message }) => {
+  const interest = INQUIRY_LABELS[inquiryType] || inquiryType;
+  const subject = interest ? `${interest} enquiry from ${name}` : `Website enquiry from ${name}`;
+  const body = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    interest ? `Interest: ${interest}` : null,
+    '',
+    message,
+  ]
+    .filter((line) => line !== null)
+    .join('\n');
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
+
 const ContactForm = ({ defaultInquiry = '', applyToken = 0 }) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({ ...emptyForm, inquiryType: defaultInquiry });
+  // Holds a mailto link when saving failed, so the message still has a way out.
+  const [emailFallback, setEmailFallback] = useState('');
 
   // Preselect the inquiry type when a "Volunteer / Mentor / Donate" button sends
   // the visitor here, without wiping anything they've already typed. `applyToken`
@@ -42,9 +74,11 @@ const ContactForm = ({ defaultInquiry = '', applyToken = 0 }) => {
     setIsSubmitting(false);
 
     if (!result.ok) {
+      // Keep everything they typed and offer email as a second route out.
+      setEmailFallback(buildMailtoLink(formData));
       toast({
-        title: 'Something went wrong',
-        description: 'We could not send your message. Please try again or email us directly.',
+        title: 'We could not reach our server',
+        description: 'Your message is still here. You can send it to us by email instead.',
         variant: 'destructive',
       });
       return;
@@ -54,6 +88,7 @@ const ContactForm = ({ defaultInquiry = '', applyToken = 0 }) => {
       title: 'Message sent',
       description: 'Thank you for reaching out. We will get back to you soon.',
     });
+    setEmailFallback('');
     setFormData({ ...emptyForm });
   };
 
@@ -116,6 +151,21 @@ const ContactForm = ({ defaultInquiry = '', applyToken = 0 }) => {
           className="text-foreground resize-none"
         />
       </div>
+
+      {emailFallback && (
+        <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-4 space-y-3">
+          <p className="text-sm text-foreground leading-relaxed">
+            We could not reach our server just now, so nothing has been saved yet. Nothing you
+            wrote is lost: send it straight to our inbox instead, or try the button below again.
+          </p>
+          <Button variant="outline" className="w-full" asChild>
+            <a href={emailFallback}>
+              <Mail className="mr-2 h-4 w-4" />
+              Send this by email instead
+            </a>
+          </Button>
+        </div>
+      )}
 
       <Button
         type="submit"

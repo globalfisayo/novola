@@ -1,35 +1,61 @@
 name: Supabase keep-alive
 
-# Free Supabase projects are auto-paused after 7 days of inactivity. This job
-# makes a tiny read request to the database every 3 days so the Novola project
-# (which powers the contact/volunteer forms + /admin dashboard) stays awake.
+# Supabase pauses a free project when it "does not receive sufficient user
+# database activity over the past week". Their guidance is that "a few user
+# requests to the database each day" is enough to stay awake:
+# https://supabase.com/docs/guides/platform/free-project-pausing
+#
+# An earlier version of this job pinged once every three days, which was below
+# that bar: the pings all returned 200 while the project quietly paused anyway.
+# So this now runs twice a day and makes a couple of real queries each time.
 #
 # Note: the key below is the PUBLIC anon key (already shipped in the site
-# bundle) — safe to commit. Row Level Security is the real security boundary.
+# bundle) so it is safe to commit. Row Level Security is the real boundary.
 #
-# Caveat: GitHub disables scheduled workflows if the repository gets no commits
-# for 60 days. Any blog edit or site change resets that clock, so in normal use
-# this keeps running. To remove auto-pausing entirely, upgrade Supabase to Pro.
+# Caveat: GitHub switches off scheduled workflows in a repository that has had
+# no commits for 60 days. Any blog edit or site change resets that clock.
 
 on:
   schedule:
-    - cron: '23 7 */3 * *' # every 3 days at 07:23 UTC
-  workflow_dispatch: # lets you run it manually from the Actions tab
+    - cron: '17 6 * * *' # 06:17 UTC daily
+    - cron: '43 18 * * *' # 18:43 UTC daily
+  workflow_dispatch: # run on demand from the Actions tab
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase REST API
+      - name: Query Supabase
+        env:
+          PROJECT_URL: https://kkqaeezobpcievjfavjx.supabase.co
+          ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtrcWFlZXpvYnBjaWV2amZhdmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNDQyNjksImV4cCI6MjA5ODYyMDI2OX0.T-kugaEeUu2ywJLW6DHFQFOIBkjI7S8Mm2-Uqio0XAs
         run: |
-          ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtrcWFlZXpvYnBjaWV2amZhdmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNDQyNjksImV4cCI6MjA5ODYyMDI2OX0.T-kugaEeUu2ywJLW6DHFQFOIBkjI7S8Mm2-Uqio0XAs"
-          CODE=$(curl -s -m 30 -o /dev/null -w "%{http_code}" \
-            "https://kkqaeezobpcievjfavjx.supabase.co/rest/v1/submissions?select=id&limit=1" \
-            -H "apikey: $ANON" -H "Authorization: Bearer $ANON")
-          echo "Supabase responded with HTTP $CODE"
-          # 2xx means the DB answered (kept alive). Fail the job on anything else
-          # so a paused/broken project is visible in the Actions tab.
-          case "$CODE" in
-            2*) echo "Keep-alive OK." ;;
-            *) echo "Keep-alive did NOT get a healthy response — the project may be paused."; exit 1 ;;
-          esac
+          healthy=0
+          for attempt in 1 2 3; do
+            code=$(curl -s -m 30 -o /dev/null -w "%{http_code}" \
+              "$PROJECT_URL/rest/v1/submissions?select=id&limit=1" \
+              -H "apikey: $ANON_KEY" -H "Authorization: Bearer $ANON_KEY" || echo "000")
+            echo "Query $attempt: HTTP $code"
+            case "$code" in 2*) healthy=$((healthy + 1)) ;; esac
+            [ "$attempt" -lt 3 ] && sleep 20
+          done
+
+          if [ "$healthy" -gt 0 ]; then
+            echo "Keep-alive OK ($healthy of 3 queries answered)."
+            echo "### Supabase awake ($healthy/3 queries answered)" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          echo "::error::Supabase did not answer any query. The project is most likely paused."
+          {
+            echo "### Supabase is not responding"
+            echo ""
+            echo "The database behind the contact, volunteer and mentor forms is unreachable,"
+            echo "most likely paused. Visitors submitting a form right now are shown a fallback"
+            echo "that lets them email info@novola.org instead, so enquiries are not lost."
+            echo ""
+            echo "**To fix:** open the project dashboard and press Restore."
+            echo ""
+            echo "https://supabase.com/dashboard/project/kkqaeezobpcievjfavjx"
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
